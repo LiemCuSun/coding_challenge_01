@@ -51,7 +51,7 @@
         <input type="number" id="putar">
         <button onclick="balikarah()" id="balikarah">LEFT</button>
         <button onclick="putar()" id="putar">RIGHT</button>
-        <button id="reset">RESET</button>
+        <button id="reset" onclick="reset()">RESET</button>
     </center>
 </body>
 <script id="database">
@@ -87,7 +87,7 @@
     function sort1(index) {
         console.log("button sort 1 di klik")
         let dataAngka = data[index]
-        
+
 
         if (dataAngka[0] > dataAngka[2]) {
             dataAngka.sort((a, b) => a > b ? 1 : -1)
@@ -97,6 +97,62 @@
         console.log(data[index])
         Table()
     }
+
+    function sort2(index) {
+        console.log("button sort 2 di klik")
+        let dataAngka = data[index]
+        let rowAngka = []
+        for (let i = 0; i < data.length; i++) {
+            rowAngka.push(data[i][index])
+        }
+
+
+        if (rowAngka[0] > rowAngka[2]) {
+            rowAngka.sort((a, b) => a > b ? 1 : -1)
+        } else {
+            rowAngka.sort((a, b) => a > b ? -1 : 1)
+        }
+        console.log(rowAngka[index])
+        data[0][index] = rowAngka[0]
+        data[1][index] = rowAngka[1]
+        data[2][index] = rowAngka[2]
+
+        Table()
+    }
+
+    function balikarah() {
+        let putarAngka = Array(3).fill(0).map(i => i = Array(3).fill(0))
+        data.reverse()
+        for (let i = 0; i < data.length; i++) {
+            for (let j = 2; j >= 0; j--) {
+                putarAngka[j][i] = data[i][j]
+            }
+        }
+        data = putarAngka
+        Table()
+    }
+
+    function putar() {
+        let putarAngka = Array(3).fill(0).map(i => i = Array(3).fill(0))
+        for (let i = 0; i < data.length; i++) {
+            for (let j = 2; j >= 0; j--) {
+                putarAngka[j][i] = data[i][j]
+            }
+        }
+        data = putarAngka.reverse()
+        Table()
+    }
+
+    function reset() {
+        data = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        ]
+
+        Table()
+    }
+
 
 </script>
 
