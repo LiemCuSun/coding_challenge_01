@@ -42,82 +42,62 @@
     <br><br><br><br>
     <center>
         <table id="daftar-user">
-            <tbody>
-
-            </tbody>
-            <tr>
-                <th><button id="sort4" onclick="onbtnshort4()">SORT</button></th>
-                <th><button id="sort5" onclick="onbtnshort5()">SORT</button></th>
-                <th><button id="sort6" onclick="onbtnshort6()">SORT</button></th>
-            </tr>
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
         </table>
         <br>
         <input type="number" id="putar">
-        <button id="left">LEFT</button>
-        <button id="right">RIGHT</button>
+        <button onclick="balikarah()" id="balikarah">LEFT</button>
+        <button onclick="putar()" id="putar">RIGHT</button>
         <button id="reset">RESET</button>
     </center>
 </body>
 <script id="database">
     let data = [
-        {
-            baris1: 1,
-            baris2: 2,
-            baris3: 3
-        },
-        {
-            baris1: 4,
-            baris2: 5,
-            baris3: 6
-        },
-        {
-            baris1: 7,
-            baris2: 8,
-            baris3: 9
-        }
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
     ]
-        function Table(){
+    function Table() {
 
-            let tbody = document.getElementsByTagName("tbody")[0]
-            console.log(tbody)
-        
-            let tr = ""
-            for (let i = 0; i < data.length; i++) {
-                tr += `
-                        <tr>
-                            <td>${data[i].baris1}</td>
-                            <td>${data[i].baris2}</td>
-                            <td>${data[i].baris3}</td>
-                            <td>
-                                <button onclick="OnBtnShort(${i})">SORT</button>
-                            </td>
-                        </tr>`
+        let tbody = document.getElementsByTagName("tr")
+        console.log(tbody)
+
+
+        for (let i = 0; i < data.length; i++) {
+            let output = ""
+            for (let j = 0; j < data.length; j++) {
+                output += `<td>${data[i][j]}</td>`
             }
-            tbody.innerHTML = tr
+            tbody[i].innerHTML = output + `<td><button id="sort1" onclick="sort1(${i})"> SORT </button></td>`
         }
+        tbody[3].innerHTML = `
+        <td><button id="sort2" onclick="sort2(${0})"> SORT </button></td>
+        <td><button id="sort2" onclick="sort2(${1})"> SORT </button></td>
+        <td><button id="sort2" onclick="sort2(${2})"> SORT </button></td>
+        <td></td>
+        `
+    }
 
-        Table()
+    Table()
 
-</script>
-<script id="function">
-    function OnBtnShort(index) {
+
+    function sort1(index) {
         console.log("button sort 1 di klik")
+        let dataAngka = data[index]
         
 
-        function sorting(a, b) {
-            if (a.data > b.data) {
-                return 1
-            }
-            if (a.data < b.data) {
-                return -1
-            }
-            return 0
+        if (dataAngka[0] > dataAngka[2]) {
+            dataAngka.sort((a, b) => a > b ? 1 : -1)
+        } else {
+            dataAngka.sort((a, b) => a > b ? -1 : 1)
         }
-        data.sort(sorting)
         console.log(data[index])
-
         Table()
     }
+
 </script>
 
 </html>
